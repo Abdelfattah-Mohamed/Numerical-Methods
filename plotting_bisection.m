@@ -1,5 +1,5 @@
-function plotting_bisection(f,root,xLower,xUpper,i)
-
+function plotting_bisection(str,root,xLower,xUpper,i)
+    f = str2func(str);
     y = [f(xLower(1,1)), f(xUpper(1,1))];
     aa = plot ([xLower(1,1),xLower(1,1)],y,'b');
     hold on;

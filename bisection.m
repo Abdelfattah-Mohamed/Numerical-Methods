@@ -39,7 +39,7 @@ else
        %pause(0.5);
        xLower(1,i) = xl;
        xUpper(1,i) = xu;
-       ea(1,i) = abs((xu-xl)/xl)*100;
+       ea(1,i) = abs((xu-xl)/xl);
        if f(xl)*f(root(1,i))<0
            xu = root(1,i);
            %{

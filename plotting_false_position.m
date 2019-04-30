@@ -1,5 +1,5 @@
-function plotting_false_position(f,root,xLower,xUpper,i)
-
+function plotting_false_position(str,root,xLower,xUpper,i)
+    f = str2func(str);
     it = plot([xLower(1,1),xUpper(1,1)],[f(xLower(1,1)),f(xUpper(1,1))],'g');
     hold on;
     arrX = (xLower(1,1)-1):0.1:(xUpper(1,1)+1);

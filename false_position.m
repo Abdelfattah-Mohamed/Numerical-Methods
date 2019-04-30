@@ -1,5 +1,5 @@
 function [root,ea,i,xLower,xUpper] = false_position(str,xl,xu,es,imax)
-f = str2func(str);
+    f = str2func(str);
     %{
     it = plot([xl,xu],[f(xl),f(xu)],'g');
     hold on;
@@ -34,7 +34,7 @@ f = str2func(str);
            root(1,i) = (xl*f(xu) - xu*f(xl))/(f(xu) - f(xl));
            xLower(1,i) = xl;
            xUpper(1,i) = xu;
-           ea(1,i) = abs((xu-xl)/xl)*100;
+           ea(1,i) = abs((xu-xl)/xl);
            if f(root(1,i))<0
                xl = root(1,i);
                %delete(it);
