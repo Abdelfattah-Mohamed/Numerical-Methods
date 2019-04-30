@@ -1,4 +1,5 @@
-function [root,ea,i,xLower,xUpper] = bisection(f,xl,xu,es,imax)
+function [root,ea,i,xLower,xUpper] = bisection(str,xl,xu,es,imax)
+f = str2func(str);
 %{
 y = [f(xl), f(xu)];
 aa = plot ([xl,xl],y,'b');
@@ -38,7 +39,7 @@ else
        %pause(0.5);
        xLower(1,i) = xl;
        xUpper(1,i) = xu;
-       ea(1,i) = abs((xu-xl)/xl);
+       ea(1,i) = abs((xu-xl)/xl)*100;
        if f(xl)*f(root(1,i))<0
            xu = root(1,i);
            %{
