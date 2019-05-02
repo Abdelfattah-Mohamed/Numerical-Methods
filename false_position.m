@@ -1,18 +1,6 @@
 function [root,ea,i,xLower,xUpper] = false_position(str,xl,xu,es,imax)
-    f = str2func(str);
-    %{
-    it = plot([xl,xu],[f(xl),f(xu)],'g');
-    hold on;
-    arrX = (xl-1):0.1:(xu+1);
-    arrY = [];
-    for temp = arrX
-        arrY = [arrY, f(temp)];
-    end
-    fun = plot(arrX,arrY);
-    hold on;
-    pause(0.5);
-    %}
-    if f(xl)*f(xu)>0
+    f = str2sym(str);
+    if subs(f,xl)*subs(f,xu)>0
         root = ('no bracket!');
         ea = ('');
         i = 0;
@@ -31,22 +19,16 @@ function [root,ea,i,xLower,xUpper] = false_position(str,xl,xu,es,imax)
         root = zeros(1,1);
         tic;
         for i=1:1:imax
-           root(1,i) = (xl*f(xu) - xu*f(xl))/(f(xu) - f(xl));
+           root(1,i) = (xl*subs(f,xu) - xu*subs(f,xl))/(subs(f,xu) - subs(f,xl));
            xLower(1,i) = xl;
            xUpper(1,i) = xu;
            ea(1,i) = abs((xu-xl)/xl);
-           if f(root(1,i))<0
+           if subs(f,root(1,i))<0
                xl = root(1,i);
-               %delete(it);
-               %it = plot ([xl,xu],[f(xl),f(xu)],'g');
-               %pause(0.5);
-           elseif f(root(1,i))>0
+           elseif subs(f,root(1,i))>0
                xu = root(1,i);
-               %delete(it);
-               %it = plot ([xl,xu],[f(xl),f(xu)],'g');
-               %pause(0.5);
            end
-           if (f(xl)* f(root(1,i)) == 0) || (ea(1,i) <= es)
+           if (subs(f,xl)* subs(f,root(1,i)) == 0) || (ea(1,i) <= es)
                break;
            end
         end

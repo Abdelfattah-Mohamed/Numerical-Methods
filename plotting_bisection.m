@@ -1,6 +1,6 @@
 function plotting_bisection(str,root,xLower,xUpper,i)
-    f = str2func(str);
-    y = [f(xLower(1,1)), f(xUpper(1,1))];
+    f = str2sym(str);
+    y = [subs(f,xLower(1,1)), subs(f,xUpper(1,1))];
     aa = plot ([xLower(1,1),xLower(1,1)],y,'b');
     hold on;
     bb = plot ([xUpper(1,1),xUpper(1,1)],y,'g');
@@ -8,7 +8,7 @@ function plotting_bisection(str,root,xLower,xUpper,i)
     arrX = (xLower(1,1)-1):0.1:(xUpper(1,1)+1);
     arrY = [];
     for temp = arrX
-        arrY = [arrY, f(temp)];
+        arrY = [arrY, subs(f,temp)];
     end
     fun = plot(arrX,arrY,'k');
     hold on;
@@ -18,7 +18,7 @@ function plotting_bisection(str,root,xLower,xUpper,i)
        hold on;
        mid = plot([root(1,t),root(1,t)],y,'r');
        hold on;
-       point = plot(root(1,t),f(root(1,t)),'ko','markerfacecolor','k');
+       point = plot(root(1,t),subs(f,root(1,t)),'ko','markerfacecolor','k');
        hold on;
        pause(0.5);
         if root(1,t) == xLower(1,(t+1))
@@ -35,6 +35,6 @@ function plotting_bisection(str,root,xLower,xUpper,i)
     end
     mid = plot([root(1,i),root(1,i)],y,'r');
     hold on;
-    point = plot(root(1,i),f(root(1,i)),'ko','markerfacecolor','k');
+    point = plot(root(1,i),subs(f,root(1,i)),'ko','markerfacecolor','k');
     hold on;
 end
