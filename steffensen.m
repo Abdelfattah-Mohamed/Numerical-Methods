@@ -1,33 +1,31 @@
-function p = steffensen(s)
-
+function [p,p0,ea] = steffensen(s)
 f = str2sym(s);
-
+p = zeros(1);
+ea = zeros(1);
+p0 = zeros(1);
 for j=1:50
-  p0 = randi([-100,100]); %tring to find initial value near to the root 
-  x = subs(f,p0);          %To make the algorithm more ifficient
+  p0(1) = randi([-100,100]); %tring to find initial value near to the root 
+  x = subs(f,p0(1));          %To make the algorithm more ifficient
   if (x > -2) && (x < 2)
       break;
   end
 end
 if j == 50                %Not finding initial value by rand 
-    p0 = 0;               %so we assume it
+    p0(1) = 0;               %so we assume it
 end
 format compact
 format long
 if x ~= 0
 for i=1:50
-    p1=subs(f,p0);
+    p1=subs(f,p0(i));
     p2=subs(f,p1);
-    p=p0-(p1-p0)^2/(p2-2*p1+p0);
-    if abs((p-p0)/p) <= 10^-4
+    p(i)=p0(i)-(p1-p0(i))^2/(p2-2*p1+p0(i));
+    ea(i) = abs((p(i)-p0(i))/p(i));
+    if ea(i) <= 10^-4
         break ;
     end
-    p0=p;
-end
-if abs((p-p0)/p)>10^-4
-    disp('failed to converge in 50 iterations.');
+    p0(i+1) = p(i);
 end
 else
-    p = p0;
+    p(1) = p0(1);
 end
-sprintf('%16.f',p);
