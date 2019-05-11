@@ -18,7 +18,7 @@ else
     xUpper = zeros(1,1);
     root = zeros(1,1);
     tic;
-    for i=1:1:imax
+    for i=1:imax
        root(1,i) = (xu+xl)/2;
        xLower(1,i) = xl;
        xUpper(1,i) = xu;
