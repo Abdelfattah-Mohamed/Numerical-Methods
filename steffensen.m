@@ -1,8 +1,9 @@
-function [p,p0,ea] = steffensen(s)
+function [p,p0,ea,i] = steffensen(s)
 f = str2sym(s);
 p = zeros(1);
 ea = zeros(1);
 p0 = zeros(1);
+i = 0;
 for j=1:50
   p0(1) = randi([-100,100]); %tring to find initial value near to the root 
   x = subs(f,p0(1));          %To make the algorithm more ifficient
@@ -28,4 +29,5 @@ for i=1:50
 end
 else
     p(1) = p0(1);
+end
 end
