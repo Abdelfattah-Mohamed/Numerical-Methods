@@ -5,7 +5,7 @@ function [f1,x1,x2,err] = fixed_point(s,x0,itr,epsilon)
     x = str2sym('x');
     c = coeffs(f);
     f1 = (-f+c(2)*x) / c(2);
-    if subs(diff(f1),x0) > 1 || subs(diff(f1),x0) < -1
+    if (subs(diff(f1),x0) > 1) || (subs(diff(f1),x0) < -1)
         x1 = 'diverge';
         fprintf(fileID,'Diverge \r\n');
     else
@@ -23,7 +23,7 @@ function [f1,x1,x2,err] = fixed_point(s,x0,itr,epsilon)
                 er(i)=((err(i)-err(i-1))/err(i)) * 100;
             end
             %finding the error at each iteration
-            fprintf(fileID,"%6d %12.5f %12.5f %12.5f \r\n", i, x1(i), x2(i), ea(i));
+            fprintf(fileID,"%6d %12.5f %12.5f %12.5f \r\n", i, x1(i), x2(i), err(i));
             if err(i)<=epsilon %checking the amount of error at each iteration
                 break %if enough accuracy has been achieved the stop the iterations
             end
@@ -33,6 +33,7 @@ function [f1,x1,x2,err] = fixed_point(s,x0,itr,epsilon)
         %disp(x2(size(x2)));
         %fprintf('The Root is : %f \n',xnew);
         fprintf(fileID,"time = %.6f ms\n", toc);
+        fprintf(fileID,"Theoritical Error = %.6f \n", subs(diff(f1),xnew));
     end
     fclose(fileID);
 end

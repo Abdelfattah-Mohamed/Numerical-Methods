@@ -14,7 +14,7 @@ for i=3:maxI
     iterations=iterations+1;
     root = x(i);
     ea(i-2) = abs((x(i)-x(i-1))/x(i));
-    fprintf(fileID,"%6d %12.5f %12.5f %12.5f \r\n", i, x(i-1), x(i), err(i-2));
+    fprintf(fileID,"%6d %12.5f %12.5f %12.5f \r\n", i, x(i-1), x(i), ea(i-2));
     if  (ea(i-2) <= es) %*100 walla mn8er ? 7asab hwa hyb3thaly ezay
         break;
     end

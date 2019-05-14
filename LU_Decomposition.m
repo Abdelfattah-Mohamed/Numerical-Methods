@@ -1,14 +1,14 @@
 function [x] = LU_Decomposition(funcs,size)
 
-x= zeros;
-y=zeros;
-eqns = zeros;
-l(3,3) = zeros;
-for i=1:size
-    eqns(i) = str2sym(funcs(i));
-end
+x= zeros(1);
+y=zeros(1);
+%eqns = zeros;
+l = zeros(3,3);
+%for i=1:size
+ %   eqns(i) = str2sym(funcs(i));
+%end
 
-[u,b] = equationsToMatrix(eqn);
+[u,b] = equationsToMatrix(funcs);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,7 +38,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for i=size:1
+for i=size:-1:1
     n=y(i);
     for j = i+1:size
         n = n - u(i,j)*x(j);

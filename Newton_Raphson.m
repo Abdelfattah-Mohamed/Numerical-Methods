@@ -18,5 +18,6 @@ function [x,err] = Newton_Raphson(s,x0,itr,error)
     %root=x(i);
     %fprintf('The Root is : %f \n',root);
     fprintf(fileID,"time = %.6f ms\n", toc);
+    fprintf(fileID,"Theoritical Error = %.6f \n", (subs(diff(d),x(size(x,2)))/2*subs(d,x(size(x,2)))));
     fclose(fileID);
 end

@@ -38,5 +38,6 @@ else
     end
 end
 fprintf(fileID,"time = %.6f ms\n", toc);
+fprintf(fileID,"Theoritical Error = %d",(log10(xu-xl)-log10(es))/log10(2));
 fclose(fileID);
 end

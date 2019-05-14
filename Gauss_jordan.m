@@ -1,12 +1,12 @@
 function [x] = Gauss_jordan(funcs,size)
 
-x= zeros;
-eqns = zeros;
-for i=1:size
-    eqns(i) = str2sym(funcs(i));
-end
+x= zeros(1);
+%eqns = zeros;
+%for i=1:size
+ %   eqns(i) = str2sym(funcs(i));
+%end
 
-[a,b] = equationsToMatrix(eqn);
+[a,b] = equationsToMatrix(funcs);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,15 +18,16 @@ for i=1:size
             a(j,k)=a(j,k)+R*a(i,k);
         end
         b(j,1)=b(j,1)+R*b(i,1);
-        
         end
     end
-    
 end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 for i=1:size
-    x(i) = a(i,i);
-    
+    b(i,1) = b(i,1)/a(i,i);
+    a(i,i) = 1;
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+for i=1:size
+    x(i) = b(i,1);
+end
 end
