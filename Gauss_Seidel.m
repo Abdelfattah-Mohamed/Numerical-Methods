@@ -1,9 +1,15 @@
 function [X,err,j] = Gauss_Seidel(funcs,X0,itr,error)
-
-disp ( 'Enter the system of linear equations in the form of AX=B')
-
+fileID = fopen("Gauss_Seidel_Solution.txt", "w");
+fprintf(fileID,"%6s ", 'itr');
 [A,B] = equationsToMatrix(funcs);
 [na , ma ] = size (A);
+for m=1:na
+    fprintf(fileID," %13s%d ", 'X', m);
+end
+for m=1:na
+    fprintf(fileID," %13s%d ", 'eps', m);
+end
+fprintf(fileID,"\n");
 if na ~= ma
     disp('ERROR: Matrix A must be a square matrix')
     return
@@ -19,6 +25,7 @@ end
 k= 1; 
 X( : , 1 ) = X0;
 err = zeros(na,1);
+tic;
 for j=1:itr
     for i=1:na
       if(i==1)   
@@ -34,6 +41,17 @@ for j=1:itr
             break;
     end
     k = k + 1;
-    
 end
+for i=1:j
+    fprintf(fileID,"%6d ", i);
+    for m=1:na
+        fprintf(fileID,"%6s%d= %.5f ", 'X', m, X(m,i));
+    end
+    for m=1:na
+        fprintf(fileID,"%6s%d= %.5f ", 'ea', m, err(m,i));
+    end
+    fprintf(fileID,"\n");
+end
+fprintf(fileID,"time = %.6f ms\n", toc);
+fclose(fileID);
 end

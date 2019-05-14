@@ -1,5 +1,5 @@
 function [x] = Gauss_jordan(funcs,size)
-
+fileID = fopen("Gauss_jordan_Solution.txt", "w");
 x= zeros(1);
 %eqns = zeros;
 %for i=1:size
@@ -7,9 +7,8 @@ x= zeros(1);
 %end
 
 [a,b] = equationsToMatrix(funcs);
-
+tic;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 for i=1:size
     for j=1:size
         if j ~= i %pivot eq
@@ -30,4 +29,9 @@ end
 for i=1:size
     x(i) = b(i,1);
 end
+for i=1:size
+    fprintf(fileID,"X%d = %.6f \n", i, x(i));
+end
+fprintf(fileID,"time = %.6f ms\n", toc);
+fclose(fileID);
 end

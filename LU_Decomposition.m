@@ -1,5 +1,5 @@
 function [x] = LU_Decomposition(funcs,size)
-
+fileID = fopen("LU_Decomposition_Solution.txt", "w");
 x= zeros(1);
 y=zeros(1);
 %eqns = zeros;
@@ -44,5 +44,10 @@ for i=size:-1:1
         n = n - u(i,j)*x(j);
     end
     x(i) = n / u(i,i);
-    
+end
+for i=1:size
+    fprintf(fileID,"X%d = %.6f \n", i, x(i));
+end
+fprintf(fileID,"time = %.6f ms\n", toc);
+fclose(fileID);
 end

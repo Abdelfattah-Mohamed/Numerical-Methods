@@ -1,15 +1,13 @@
 function [x] = Gauss_Elimination(funcs,size)
-
+fileID = fopen("Gauss_Elimination_Solution.txt", "w");
 x= zeros(1);
 %eqns = zeros;
 %for i=1:size
    % eqns(i) = str2sym(funcs(i));
 %end
-
 [a,b] = equationsToMatrix(funcs);
-
+tic;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 for i=1:size
     for j=i+1:size
         R = -(a(j,i)/a(i,i));
@@ -28,4 +26,9 @@ for i=size:-1:1
     end
     x(i) = n / a(i,i);
 end
+for i=1:size
+    fprintf(fileID,"X%d = %.6f \n", i, x(i));
+end
+fprintf(fileID,"time = %.6f ms\n", toc);
+fclose(fileID);
 end
