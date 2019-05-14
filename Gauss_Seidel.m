@@ -24,6 +24,8 @@ end
 % allowable error in final answer
 k= 1; 
 X( : , 1 ) = X0;
+errs = ones(na,1);
+errs = errs.*error;
 err = zeros(na,1);
 tic;
 for j=1:itr
@@ -37,7 +39,7 @@ for j=1:itr
       end
     end
     err( : , k ) = abs(X( :,k+1) - X( :, k));% finding error
-    if err(:,k) <= error(:,1)
+    if err(:,k) <= errs(:,1)
             break;
     end
     k = k + 1;
