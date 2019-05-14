@@ -1,14 +1,35 @@
 function [x] = Gauss_Elimination(funcs,size)
 fileID = fopen("Gauss_Elimination_Solution.txt", "w");
 x= zeros(1);
-%eqns = zeros;
-%for i=1:size
-   % eqns(i) = str2sym(funcs(i));
-%end
+flag = 0;
 [a,b] = equationsToMatrix(funcs);
 tic;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i=1:size
+    if a(i,i) == 0
+        flag =1;
+        break;
+    end
+end
+for i=1:size
+    if flag ==1
+        max = abs(a(1,i));
+        maxInd =1;
+            for t=2:size
+                if abs(a(t,i))>=max
+                    max = abs(a(t,i));
+                    maxInd = t;
+                end
+            end
+            bn = b(i,1);
+            b(i,1)=b(maxInd,1);
+            b(maxInd,1)=bn;
+            for k=1:size
+                an=a(i,k);
+                a(i,k)=a(maxInd,k);
+                a(maxInd,k)=an;
+            end
+    end
     for j=i+1:size
         R = -(a(j,i)/a(i,i));
         for k=1:size

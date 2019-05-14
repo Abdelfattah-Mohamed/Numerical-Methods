@@ -2,17 +2,35 @@ function [x] = LU_Decomposition(funcs,size)
 fileID = fopen("LU_Decomposition_Solution.txt", "w");
 x= zeros(1);
 y=zeros(1);
-%eqns = zeros;
+flag = 0;
 l = zeros(3,3);
-%for i=1:size
- %   eqns(i) = str2sym(funcs(i));
-%end
-
 [u,b] = equationsToMatrix(funcs);
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 for i=1:size
+    if u(i,i) == 0
+        flag =1;
+        break;
+    end
+end
+for i=1:size
+    if flag ==1
+        max = abs(u(1,i));
+        maxInd =1;
+            for t=2:size
+                if abs(u(t,i))>=max
+                    max = abs(u(t,i));
+                    maxInd = t;
+                end
+            end
+            bn = b(i,1);
+            b(i,1)=b(maxInd,1);
+            b(maxInd,1)=bn;
+            for k=1:size
+                an=u(i,k);
+                u(i,k)=u(maxInd,k);
+                u(maxInd,k)=an;
+            end
+    end
     for j=i+1:size
         R = (u(j,i)/u(i,i));
         l(j,i) = R;
