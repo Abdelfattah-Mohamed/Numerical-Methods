@@ -6,7 +6,7 @@ function plotting_bisection(str,root,xLower,xUpper,i)
     hold on;
     bb = plot ([xUpper(1,1),xUpper(1,1)],y,'g');
     hold on;
-    arrX = (xLower(1,1)-1):0.01:(xUpper(1,1)+1);
+    arrX = (xLower(1,1)):(xUpper(1,1)-xLower(1,1))/20:(xUpper(1,1));
     arrY = [];
     for temp = arrX
         arrY = [arrY, (subs(f,temp))];

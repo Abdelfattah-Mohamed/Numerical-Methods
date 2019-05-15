@@ -1,5 +1,4 @@
 function plotting_secant(s,xi)
-    
     figure('name','plotting_secant');
     f = str2sym(s);
     if xi(1) < xi(size(xi))

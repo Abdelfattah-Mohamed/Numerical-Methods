@@ -1,5 +1,4 @@
 function plotting_a (bisection, false, fixed, newton, secant, birge)
-    
     figure('name','plotting_roots');
     plot(1:1:size(bisection,2), bisection, 'k');
     hold on;

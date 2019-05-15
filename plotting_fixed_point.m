@@ -1,10 +1,9 @@
-function plotting_fixed_point(str,xi,xii,i)
+function plotting_fixed_point(g,xi,xii,i)
     figure('name','plotting_fixed_point');
-    g = str2sym(str);
-    if xi(1) < xi(size(xi))
-        arrX = (xi(1)-1):0.01:(xi(size(xi))+1);
+    if xi(1) < xi(size(xi,2))
+        arrX = (xi(1)-1):(xi(size(xi,2)) - xi(1))/20:(xi(size(xi,2))+1);
     else
-        arrX = (xi(size(xi))-1):0.01:(xi(1)+1);
+        arrX = (xi(size(xi,2))-1):(xi(1) - xi(size(xi,2)))/20:(xi(1)+1);
     end
     arrY = [];
     for temp = arrX
