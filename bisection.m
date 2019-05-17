@@ -4,12 +4,12 @@ fileID = fopen("Bisection_Solution.txt", "w");
 fprintf(fileID,'%6s %12s %12s %12s %12s \r\n','itr', 'Xl', 'Xu', 'root', 'eps');
 tic;
 if subs(f,xl)*subs(f,xu)>0
-    root = ('no bracket!');
+    root = zeros(1);
     fprintf(fileID,'Diverge \r\n');
-    ea = ('');
+    ea = zeros(1);
     i = 0;
-    xLower = ('');
-    xUpper = ('');
+    xLower = zeros(1);
+    xUpper = zeros(1);
 else
     if nargin == 3
         es = 0.00001;

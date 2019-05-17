@@ -6,17 +6,10 @@ function plotting_bisection(str,root,xLower,xUpper,i)
     hold on;
     bb = plot ([xUpper(1,1),xUpper(1,1)],y,'g');
     hold on;
-    arrX = (xLower(1,1)):(xUpper(1,1)-xLower(1,1))/20:(xUpper(1,1));
-    arrY = [];
-    for temp = arrX
-        arrY = [arrY, (subs(f,temp))];
-    end
-    fun = plot(arrX,arrY,'k');
+    fplot(f);
     hold on;
     pause;
     for t = 1:1:(i-1)
-       fun = plot(arrX,arrY,'k');
-       hold on;
        mid = plot([root(1,t),root(1,t)],y,'r');
        hold on;
        point = plot(root(1,t),(subs(f,(root(1,t)))),'ko','markerfacecolor','k');

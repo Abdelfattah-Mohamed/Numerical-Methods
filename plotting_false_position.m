@@ -3,20 +3,12 @@ function plotting_false_position(str,root,xLower,xUpper,i)
     f = str2sym(str);
     it = plot([xLower(1,1),xUpper(1,1)],[(subs(f,(xLower(1,1)))),(subs(f,(xUpper(1,1))))],'g');
     hold on;
-    arrX = (xLower(1,1)):(xUpper(1,1) - xLower(1,1))/20:(xUpper(1,1));
-    arrY = [];
-    for temp = arrX
-        arrY = [arrY, (subs(f,temp))];
-    end
-    fun = plot(arrX,arrY,'k');
+    fplot(f);
     hold on;
     pause;
     point = plot(root(1,1),(subs(f,(root(1,1)))),'ko','markerfacecolor','k');
     hold on;
     for t=2:1:i
-       delete(fun);
-       fun = plot(arrX,arrY,'k');
-       hold on;
        delete(it);
        delete(point);
        it = plot ([xLower(1,t),xUpper(1,t)],[(subs(f,(xLower(1,t)))),(subs(f,(xUpper(1,t))))],'g');

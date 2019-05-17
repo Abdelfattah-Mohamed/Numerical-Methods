@@ -5,6 +5,7 @@ y=zeros(1);
 flag = 0;
 l = zeros(3,3);
 [u,b] = equationsToMatrix(funcs);
+tic;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i=1:size
     if u(i,i) == 0

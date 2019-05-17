@@ -2,6 +2,7 @@ function [root,x,iterations,ea] = secant(str,x0,xi,es,maxI)
 fileID = fopen("Secant_Solution.txt", "w");
 fprintf(fileID,'%6s %12s %12s %12s \r\n','itr', 'Xi', 'Xi+1', 'eps');
 func = str2sym(str);
+root = 0;
 ea = zeros(1);
 x = zeros(1);
 x(1) = x0;
@@ -10,6 +11,10 @@ maxI= maxI + 2;
 iterations = 0 ;
 tic;
 for i=3:maxI
+    if (subs(func,x(i-2))-subs(func,x(i-1))) == 0
+        fprintf(fileID,"Division by zero\n");
+        break;
+    end
     x(i) = x(i-1)- (subs(func,x(i-1))*(x(i-2)-x(i-1)))/(subs(func,x(i-2))-subs(func,x(i-1)));
     iterations=iterations+1;
     root = x(i);
